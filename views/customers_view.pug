@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .pusher
+    +sidebar()
+    .article
+      .main.ui.intro.container
+        +header('Просмотр клиента - ' + data.surname + ' ' + data.name)
+        +breadcrumb([{link: '/', label: 'Главная'}, {link: '/customers', label: 'Клиенты'}], title)

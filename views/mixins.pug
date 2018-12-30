@@ -10,7 +10,7 @@ mixin sidebar()
         .item
           .header Таблицы
           .menu
-            a.item(href='/users') Пользователи
+            a.item(href='/customers') Клиенты
             a.item(href='/products') Товары
             a.item(href='/sheets') Ремонтные листы
         .item
@@ -22,13 +22,12 @@ mixin sidebar()
             a.item(href='#') Информация
             a.item(href='#') Выйти
 
-mixin breadcrumb()
+mixin breadcrumb(history, active)
   #kroski.ui.breadcrumb
-    a.section Home
-    .divider  /
-    a.section Store
-    .divider  /
-    .active.section T-Shir
+    each val, index in history
+      a.section(href=val.link)= val.label
+      .divider  /
+    .active.section= active
 
-mixin header()
-  h1.ui.header Getting Started
+mixin header(text)
+  h1.ui.header= text

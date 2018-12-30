@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .pusher
+    +sidebar()
+    .article
+      .main.ui.intro.container
+        +header(title)
+        +breadcrumb([{link: '/', label: 'Главная'}], title)
+        table#example.ui.celled.table
+          thead
+            tr
+              th Фамилия
+              th Имя
+              th Телефон
+              th Действия
+          tbody
+            each val, index in data
+              tr
+                td= val.surname
+                td= val.name
+                td= val.phone_number
+                td
+                  a(href='customers/' + val.id_customer)
+                    i.eye.icon
+                  a(href='customers/' + val.id_customer + '/edit')
+                    i.edit.icon
+                  a(href='/')
+                    i.trash.icon
