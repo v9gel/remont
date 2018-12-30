@@ -1,5 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .pusher
+    +sidebar()
+    .article
+      .main.ui.intro.container
+        +header()
+        +breadcrumb()
+        table#example.ui.celled.table
+          thead
+            tr
+              th Name
+              th Position
+              th Office
+              th Age
+              th Start date
+              th Salary
+          tbody
+            tr
+              td Tiger Nixon
+              td System Architect
+              td Edinburgh
+              td 61
+              td 2011/04/25
+              td $320,800
+            tr
+              td Garrett Winters
+                td Accountant
+                td Tokyo
+                td 63
+                td 2011/07/25
+                td $170,75

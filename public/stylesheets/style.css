@@ -1,8 +1,38 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#kroski{
+  margin-bottom: 14px;
 }
 
-a {
-  color: #00B7FF;
+#example{
+  width:100%
+}
+
+.logo {
+  padding: 0 5px;
+}
+.toc {
+  position: fixed;
+  z-index: 1;
+  background-color: #1b1c1d;
+  width: 200px;
+  height: 100%;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding: 0 0px;
+}
+.ui.vertical.menu {
+  width: auto;
+}
+.article {
+  flex: 1 1 auto;
+  min-width: 0px;
+  margin-left: 200px;
+}
+.article .container {
+  max-width: 960px;
+  width: auto !important;
+  margin-left: 1em !important;
+  margin-right: 1em !important;
+  padding: 1em 0em 7em;
 }

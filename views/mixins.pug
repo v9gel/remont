@@ -1,0 +1,34 @@
+mixin sidebar()
+  .full.height
+    .toc
+      .ui.vertical.inverted.menu
+        .item
+          a.ui.logo.icon.image(href='/')
+            img(src='https://source.unsplash.com/random/35x35')
+          a(href='/')
+            b Отдел ремонта
+        .item
+          .header Таблицы
+          .menu
+            a.item(href='/users') Пользователи
+            a.item(href='/products') Товары
+            a.item(href='/sheets') Ремонтные листы
+        .item
+          .header
+            a.ui.logo.icon.image(href='/')
+              img(src='https://source.unsplash.com/random/35x35')
+            | Имя Фамилия
+          .menu
+            a.item(href='#') Информация
+            a.item(href='#') Выйти
+
+mixin breadcrumb()
+  #kroski.ui.breadcrumb
+    a.section Home
+    .divider  /
+    a.section Store
+    .divider  /
+    .active.section T-Shir
+
+mixin header()
+  h1.ui.header Getting Started

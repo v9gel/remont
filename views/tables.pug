@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  .pusher
+    .full.height
+      .toc
+        .ui.vertical.inverted.menu
+          .item
+            a.ui.logo.icon.image(href='/')
+              img(src='https://source.unsplash.com/random/35x35')
+            a(href='/')
+              b Remont
+          .item
+            .header Таблицы
+            .menu
+              a.item(href='/users') Пользователи
+              a.item(href='/products') Товары
+              a.item(href='/sheets') Ремонтные листы
+          .item
+            .header
+              a.ui.logo.icon.image(href='/')
+                img(src='https://source.unsplash.com/random/35x35')
+              | Имя Фамилия
+            .menu
+              a.item(href='#') Информация
+              a.item(href='#') Выйти
+    .article
+      .main.ui.intro.container
+        h1.ui.header Getting Started
+        #kroski.ui.breadcrumb
+          a.section Home
+          .divider  /
+          a.section Store
+          .divider  /
+          .active.section T-Shir
+        table#example.ui.celled.table(style='width:100%')
+          thead
+            tr
+              th Name
+              th Position
+              th Office
+              th Age
+              th Start date
+              th Salary
+          tbody
+            tr
+              td Tiger Nixon
+              td System Architect
+              td Edinburgh
+              td 61
+              td 2011/04/25
+              td $320,800
+            tr
+              td Garrett Winters
+                td Accountant
+                td Tokyo
+                td 63
+                td 2011/07/25
+                td $170,75
