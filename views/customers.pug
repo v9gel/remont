@@ -13,6 +13,8 @@ block content
               th Фамилия
               th Имя
               th Телефон
+              th Товаров
+              th Рем. листов
               th Действия
           tbody
             each val, index in data
@@ -20,6 +22,8 @@ block content
                 td= val.surname
                 td= val.name
                 td= val.phone_number
+                td= val.count_products
+                td= val.count_sheets
                 td
                   a(href='customers/' + val.id_customer)
                     i.eye.icon

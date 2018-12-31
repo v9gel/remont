@@ -7,3 +7,37 @@ block content
       .main.ui.intro.container
         +header('Просмотр клиента - ' + data.surname + ' ' + data.name)
         +breadcrumb([{link: '/', label: 'Главная'}, {link: '/customers', label: 'Клиенты'}], title)
+        .ui.items
+          .item
+            .image
+              img(src='https://source.unsplash.com/random/175x175')
+            .content
+              a.header= data.surname + ' ' + data.name
+              .meta
+                span Клиент
+              .description
+                p= 'Номер телефона: ' + data.phone_number
+        h3 Товары клиента
+        table#example.ui.celled.table
+          thead
+            tr
+              th Товар
+              th Статус
+              th Рем. листов
+              th Действие
+          tbody
+            each val, index in table
+              tr
+                td
+                  a(href='/products/' + val.id_product)= val.name_product
+                td
+                  a(href='/statuses/' + val.id_ststus)= val.name_status
+                td= val.count_repair_sheets
+                td
+                  a(href='/products/' + val.id_product)
+                    i.eye.icon
+                  a(href='/customers/' + val.id_customer + '/edit')
+                    i.edit.icon
+                  a(href='/')
+                    i.trash.icon
+

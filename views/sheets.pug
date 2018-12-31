@@ -10,18 +10,23 @@ block content
         table#example.ui.celled.table
           thead
             tr
-              th Фамилия
-              th Имя
-              th Телефон
-              th Действия
+              th Товар
+              th Дата открытия
+              th Статус
+              th Клиент
+              th Действие
           tbody
             each val, index in data
               tr
-                td= val.surname
-                td= val.name
-                td= val.phone_number
                 td
-                  a(href='customers/' + val.id_customer)
+                  a(href='products/' + val.id_product)= val.name_product
+                td= val.date_create
+                td
+                  a(href='statuses/' + val.id_ststus)= val.name_status
+                td
+                  a(href='customers/' + val.id_customer)= val.surname_customer + ' ' + val.name_customer
+                td
+                  a(href='sheets/' + val.id_repair_sheet)
                     i.eye.icon
                   a(href='customers/' + val.id_customer + '/edit')
                     i.edit.icon

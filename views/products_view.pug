@@ -5,35 +5,42 @@ block content
     +sidebar()
     .article
       .main.ui.intro.container
-        +header('Просмотр клиента - ' + data.surname + ' ' + data.name)
-        +breadcrumb([{link: '/', label: 'Главная'}, {link: '/customers', label: 'Клиенты'}], title)
+        +header('Просмотр товара - ' + data.name_product)
+        +breadcrumb([{link: '/', label: 'Главная'}, {link: '/products', label: 'Товары'}], title)
         .ui.items
           .item
             .image
               img(src='https://source.unsplash.com/random/175x175')
             .content
-              a.header= data.surname + ' ' + data.name
+              a.header= data.name_product
               .meta
-                span Клиент
+                span Товар
               .description
-                p
+                p= 'Заводской номер: ' + data.factory_number
+                p= 'Дата начала гарантии: ' + data.date_begin_garant
+                p= 'Дата окончания гарантии: ' + data.date_end_garant
+                p= 'Статус: ' + data.name_status
+                p= 'Местоположение: полка ' + data.number_shelf + ', стэнд ' + data.number_stand
+                p= 'Клиент: '
+                  a(href='/customers/'+data.id_customer)= data.surname_customer + ' ' + data.name_customer
+        h3 Ремонтные листы товара
         table#example.ui.celled.table
           thead
             tr
-              th Товар
-              th Статус
-              th Рем. листов
+              th Дата открытия
+              th Дата экспертизы
+              th Дата начала ремонта
+              th Дата окончания ремонта
               th Действие
           tbody
             each val, index in table
               tr
+                td= val.date_create
+                td= val.date_expertise
+                td= val.date_begin_repair
+                td= val.date_end_repair
                 td
-                  a(href='/products/' + val.id_product)= val.name_product
-                td
-                  a(href='/statuses/' + val.id_ststus)= val.name_status
-                td= val.count_repair_sheets
-                td
-                  a(href='/products/' + val.id_product)
+                  a(href='/sheets/' + val.id_repair_sheet)
                     i.eye.icon
                   a(href='/customers/' + val.id_customer + '/edit')
                     i.edit.icon
