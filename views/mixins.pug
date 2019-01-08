@@ -1,26 +1,40 @@
-mixin sidebar()
+mixin sidebar(user)
   .full.height
     .toc
       .ui.vertical.inverted.menu
         .item
           a.ui.logo.icon.image(href='/')
-            img(src='https://source.unsplash.com/random/35x35')
+            img(src='../images/logo.jpg' width=35)
           a(href='/')
-            b Отдел ремонта
+            if user.post == 'customer'
+              b Кабинет клиента
+            else
+              b Отдел ремонта
+        if user.post != 'customer'
+          .item
+            .header Таблицы
+            .menu
+              div.item
+                a.item-my(href='/customers') Клиенты
+              div.item
+                a.item-my(href='/products') Товары
+              a.item(href='/sheets') Ремонтные листы
         .item
-          .header Таблицы
+          if user.post == 'customer'
+            .header Клиент
+          else if user.post == 'repairer'
+            .header Ремонтник
+          else if user.post == 'expert'
+            .header Эксперт
+          else if user.post == 'store_manager'
+            .header Складовщик
+          else if user.post == 'consultant'
+            .header Консультант
           .menu
-            a.item(href='/customers') Клиенты
-            a.item(href='/products') Товары
-            a.item(href='/sheets') Ремонтные листы
-        .item
-          .header
-            a.ui.logo.icon.image(href='/')
-              img(src='https://source.unsplash.com/random/35x35')
-            | Имя Фамилия
-          .menu
-            a.item(href='#') Информация
-            a.item(href='#') Выйти
+            div.item
+              img(src='../images/1.jpg' width=35)
+              a.item-my(href='/products')    #{user.surname} #{user.name}.
+            a.item(href='/logout') Выйти
 
 mixin breadcrumb(history, active)
   #kroski.ui.breadcrumb

@@ -2,7 +2,7 @@ extends layout
 
 block content
   .pusher
-    +sidebar()
+    +sidebar(user)
     .article
       .main.ui.intro.container
         +header(title)
@@ -26,9 +26,9 @@ block content
                 td
                   a(href='customers/' + val.id_customer)= val.surname_customer + ' ' + val.name_customer
                 td
-                  a(href='sheets/' + val.id_repair_sheet)
+                  a.ui.icon.button(href='sheets/' + val.id_repair_sheet)
                     i.eye.icon
-                  a(href='customers/' + val.id_customer + '/edit')
+                  button.ui.icon.button(id='modal' + val.id_repair_sheet)
                     i.edit.icon
-                  a(href='/')
+                  button.ui.icon.button
                     i.trash.icon

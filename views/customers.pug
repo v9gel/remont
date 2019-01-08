@@ -2,11 +2,34 @@ extends layout
 
 block content
   .pusher
-    +sidebar()
+    +sidebar(user)
     .article
       .main.ui.intro.container
-        +header(title)
+        h1.ui.header Клиенты
         +breadcrumb([{link: '/', label: 'Главная'}], title)
+        br
+        button.ui.icon.labeled.button(id='modal')
+          i.plus.icon
+          | Добавить
+          .ui.info.event-modal.modal(data-object='modal')
+            .header= 'Добавление клиента'
+            .content
+              form.ui.form(method='post', action='/customers/' + data.id_customer, id='form')
+                .field
+                  label Фамилия
+                  input(type='text', name='surname', placeholder='Фамилия')
+                .field
+                  label Имя
+                  input(type='text', name='name', placeholder='Имя')
+                .field
+                  label Телефон
+                  input(type='text', name='phone_number', placeholder='Телефон')
+            .actions
+              .ui.deny.black.button Отменить
+              .ui.button(onclick="$.post('/customers', $('#form').serialize()); location.reload();") Сохранить
+
+        br
+        br
         table#example.ui.celled.table
           thead
             tr
@@ -25,9 +48,25 @@ block content
                 td= val.count_products
                 td= val.count_sheets
                 td
-                  a(href='customers/' + val.id_customer)
+                  a.ui.icon.button(href='customers/' + val.id_customer)
                     i.eye.icon
-                  a(href='customers/' + val.id_customer + '/edit')
+                  button.ui.icon.button(id='modal'+val.id_customer)
                     i.edit.icon
-                  a(href='/')
+                      .ui.info.event-modal.modal(data-object='modal'+val.id_customer)
+                        .header= 'Редактирование клиента ' + val.surname + ' ' + val.name
+                        .content
+                          form.ui.form(method='post', action='/customers/' + val.id_customer id='form'+val.id_customer)
+                            .field
+                              label Фамилия
+                              input(type='text', value=val.surname name='surname', placeholder='Фамилия')
+                            .field
+                              label Имя
+                              input(type='text', value=val.name name='name', placeholder='Имя')
+                            .field
+                              label Телефон
+                              input(type='text', value=val.phone_number name='phone_number', placeholder='Телефон')
+                        .actions
+                          .ui.deny.black.button Отменить
+                          .ui.button(onclick="$.post('/customers/"+ val.id_customer + "', $('#form"+val.id_customer+"').serialize()); location.reload();") Сохранить
+                  button.ui.icon.button(onclick="$.ajax({ url: '/customers/"+ val.id_customer + "', type: 'DELETE'});location.reload();")
                     i.trash.icon

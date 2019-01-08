@@ -2,7 +2,8 @@ extends layout
 
 block content
   .pusher
-    +sidebar()
+    +sidebar(user)
     .article
       .main.ui.intro.container
         +header('Главная')
+        p= user.post

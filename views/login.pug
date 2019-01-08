@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  br
+  br
+  br
+  br
+  .ui.four.column.centered.grid
+    .column.aligned.center
+      h2.ui.image.header
+        img.image(src='images/logo.jpg')
+        .content
+          | Войдите в свой аккаунт
+
+      form.ui.large.form(action = "/login" method = "POST")
+        .ui.stacked.segment
+          .field
+            .ui.input
+              input(type='text', name='surname', placeholder='Фамилия')
+          .field
+            .ui.input
+              select.ui.fluid.dropdown(name='post')
+                option(value='') Выберите должность
+                option(value='consultant') Консультант
+                option(value='repairer') Ремонтник
+                option(value='store_manager') Заведующий складом
+                option(value='expert') Эксперт
+                option(value='customer') Клиент
+          button.ui.fluid.large.submit.button(type='submit') Войти
+        .ui.error.message
+

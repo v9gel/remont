@@ -3,14 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//Эта отвечает за авторизацию
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
+var session = require('express-session');
+//
 
 var indexRouter = require('./routes/index');
+var loginRouter = require('./routes/login');
+var logoutRouter = require('./routes/logout');
 var customersRouter = require('./routes/customers');
 var productsRouter = require('./routes/products');
 var sheetsRouter = require('./routes/sheets');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+//И это
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(upload.array());
+app.use(cookieParser());
+app.use(session({secret: "Your secret key"}));
+//
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +39,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 app.use('/customers', customersRouter);
 app.use('/products', productsRouter);
 app.use('/sheets', sheetsRouter);

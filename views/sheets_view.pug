@@ -2,7 +2,7 @@ extends layout
 
 block content
   .pusher
-    +sidebar()
+    +sidebar(user)
     .article
       .main.ui.intro.container
         +header('Просмотр ремонтного листа - ' + data.name_product)
@@ -10,7 +10,7 @@ block content
         .ui.items
           .item
             .image
-              img(src='https://source.unsplash.com/random/175x175')
+              img(src='../images/image.png' width=175)
             .content
               a.header= data.name_product
               .meta

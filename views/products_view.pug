@@ -2,7 +2,7 @@ extends layout
 
 block content
   .pusher
-    +sidebar()
+    +sidebar(user)
     .article
       .main.ui.intro.container
         +header('Просмотр товара - ' + data.name_product)

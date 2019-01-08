@@ -1,32 +1,43 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db');
+var helpi = require('../helpi')
 
 /* GET customers listing. */
-router.get('/', function(req, res, next) {
+router.get('/',  helpi.checkSignIn, function(req, res, next) {
   db.func('all_product')
     .then(data => {
-      /*
-      let new_data = data.map((val, index) => {
-        val.date_begin_repiar = val.date_begin_repiar.toString().slice(4,15)
-        val.date_end_repair = val.date_end_repair.toString().slice(4, 15)
-        val.date_expertise = val.date_expertise.toString().slice(4, 15)
-        return val
-      })
-      console.log(new_data)
-      */
-      res.render('products', { title: 'Товары', data: data});
+      db.any('SELECT * FROM manufacturer')
+        .then(function (data1) {
+          db.any('SELECT * FROM customer')
+            .then(function (data2) {
+              let select = {
+                manufacturer: data1,
+                customer: data2
+              }
+              res.render('products', { title: 'Товары', data: data, user: req.session.user, select: select});
+            })
+        })
     })
     .catch(error => {
       console.log('ERROR:', error); // print the error;
     });
 });
 
-router.get('/:id/edit', function(req, res, next) {
+router.post('/', function(req, res, next) {
+  console.log(req.body)
+  db.none('INSERT INTO product (id_product, name, factory_namber, date_begin_repair, date_end_repair, id_manufacturer, id_customer, id_status) VALUES(DEFAULT, ${name}, ${factory_namber}, ${date_begin_repair}, ${date_end_repair}, ${id_manufaturer}, ${id_customer}, 1)', req.body)
+  console.log(req.query)
+  res.json({
+    msg: 'true'
+  });
+});
+
+router.get('/:id/edit', helpi.checkSignIn,  function(req, res, next) {
     db.one('SELECT * FROM customer WHERE "id_customer"=' + req.params.id)
         .then(function (data) {
-            console.log(data)
-            res.render('customers_edit', { title: 'Редактирование - ' + data.surname + ' ' + data.name, data: data});
+            console.log('SESSION', req.session.user)
+            res.render('customers_edit', { title: 'Редактирование - ' + data.surname + ' ' + data.name, data: data, user: req.session.user});
         })
         .catch(function (error) {
             console.log("ERROR:", error);
@@ -49,7 +60,7 @@ router.get('/:id', function(req, res, next) {
             return val
           })
           console.log(new_table)
-          res.render('products_view', { title: 'Просмотр - ' + data[0].name_product, data: data[0], table: new_table});
+          res.render('products_view', { title: 'Просмотр - ' + data[0].name_product, data: data[0], table: new_table, user: req.session.user});
         })
         .catch(error => {
           console.log('ERROR:', error); // print the error;

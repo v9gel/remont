@@ -2,11 +2,55 @@ extends layout
 
 block content
   .pusher
-    +sidebar()
+    +sidebar(user)
     .article
       .main.ui.intro.container
         +header(title)
         +breadcrumb([{link: '/', label: 'Главная'}], title)
+        br
+        button.ui.icon.labeled.button(id='modal')
+          i.plus.icon
+          | Добавить
+          .ui.info.event-modal.modal(data-object='modal')
+            .header= 'Добавление товара'
+            .content
+              form.ui.form(id='form')
+                .field
+                  label Название
+                  input(type='text', name='name', placeholder='Название')
+                .field
+                  label Заводской номер
+                  input(type='text', name='factory_namber', placeholder='Заводской номер')
+                .field
+                  label Начало гарантии
+                  .ui.input.left.icon
+                    i.calendar.icon
+                    input(type='date', name='date_begin_garant', placeholder='Начало гарантии')
+                .field
+                  label Конец гарантии
+                  .ui.input.left.icon
+                    i.calendar.icon
+                    input(type='date', name='date_end_garant', placeholder='Конец гарантии')
+                .field
+                  label Производитель
+                  .ui.input
+                    select.ui.fluid.dropdown(name='id_manufacturer')
+                      option(value='') Выберете производителя
+                      each val, index in select.manufacturer
+                        option(value=val.id_manufacturer)= val.name
+                .field
+                  label Клиент
+                  .ui.input
+                    select.ui.fluid.dropdown(name='id_customer')
+                      each val, index in select.customer
+                        option(value='') Выберете клиента
+                        option(value=val.id_customer)= val.surname + ' ' + val.name
+
+            .actions
+              .ui.deny.black.button Отменить
+              .ui.button(onclick="$.post('/products', $('#form').serialize()); location.reload();") Добавить
+        br
+        br
         table#example.ui.celled.table
           thead
             tr
@@ -25,9 +69,9 @@ block content
                 td
                   a(href='customers/' + val.id_customer)= val.surname_customer + ' ' + val.name_customer
                 td
-                  a(href='products/' + val.id_product)
+                  a.ui.icon.button(href='products/' + val.id_product)
                     i.eye.icon
-                  a(href='products/' + val.id_product + '/edit')
+                  button.ui.icon.button(id='modal' + val.id_product)
                     i.edit.icon
-                  a(href='/')
+                  button.ui.icon.button
                     i.trash.icon

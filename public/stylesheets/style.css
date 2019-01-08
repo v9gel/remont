@@ -36,3 +36,7 @@
   margin-right: 1em !important;
   padding: 1em 0em 7em;
 }
+
+:hover .item-my {
+  color: rgb(255,255,255);
+}
