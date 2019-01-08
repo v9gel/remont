@@ -40,10 +40,6 @@ block content
                 td= val.date_begin_repair
                 td= val.date_end_repair
                 td
-                  a(href='/sheets/' + val.id_repair_sheet)
+                  a.ui.icon.button(href='/sheets/' + val.id_repair_sheet)
                     i.eye.icon
-                  a(href='/customers/' + val.id_customer + '/edit')
-                    i.edit.icon
-                  a(href='/')
-                    i.trash.icon
 

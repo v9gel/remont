@@ -19,17 +19,6 @@ router.get('/',  helpi.checkSignIn, function(req, res, next) {
     });
 });
 
-router.get('/:id/edit', function(req, res, next) {
-    db.one('SELECT * FROM customer WHERE "id_customer"=' + req.params.id)
-        .then(function (data) {
-            console.log(data)
-            res.render('customers_edit', { title: 'Редактирование - ' + data.surname + ' ' + data.name, data: data,  user: req.session.user});
-        })
-        .catch(function (error) {
-            console.log("ERROR:", error);
-        });
-});
-
 router.get('/:id',  helpi.checkSignIn, function(req, res, next) {
     db.func('one_repair_sheet', [req.params.id])
       .then(table => {
@@ -48,6 +37,10 @@ router.get('/:id',  helpi.checkSignIn, function(req, res, next) {
 router.post('/:id', function(req, res, next) {
     db.one('UPDATE customer SET "surname"=\''+req.body.surname+ '\', "name"=\''+req.body.name+'\', "phone_number"=\''+req.body.phone_number+'\' WHERE "id_customer"=' + req.params.id)
     res.redirect('/customers');
+});
+
+router.delete('/:id', function(req, res, next) {
+  db.one('DELETE FROM repair_sheet WHERE "id_repair_sheet"=' + req.params.id)
 });
 
 

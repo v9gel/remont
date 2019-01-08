@@ -19,6 +19,13 @@ mixin sidebar(user)
               div.item
                 a.item-my(href='/products') Товары
               a.item(href='/sheets') Ремонтные листы
+            .header Дополнительно
+            .menu
+              div.item
+                a.item-my(href='/stats') Статистика
+              div.item
+                a.item-my(href='/customers') Администрирование
+
         .item
           if user.post == 'customer'
             .header Клиент
@@ -33,7 +40,7 @@ mixin sidebar(user)
           .menu
             div.item
               img(src='../images/1.jpg' width=35)
-              a.item-my(href='/products')    #{user.surname} #{user.name}.
+              a.item-my(href='/products')    #{user.surname} #{user.name}
             a.item(href='/logout') Выйти
 
 mixin breadcrumb(history, active)

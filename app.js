@@ -12,6 +12,7 @@ var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var statRouter = require('./routes/stat');
 var logoutRouter = require('./routes/logout');
 var customersRouter = require('./routes/customers');
 var productsRouter = require('./routes/products');
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/stat', statRouter);
 app.use('/logout', logoutRouter);
 app.use('/customers', customersRouter);
 app.use('/products', productsRouter);

@@ -17,4 +17,30 @@ block content
                 span Ремонтный лист
               .description
                 p
+        .fluid.ui.card
+          .content
+            .header Гарантийный талон
+            .meta Наименование товара: #{data.name_product}
+            .description
+              p= 'Дата начала гарантии: ' + data.date_begin_garant.toString().slice(0, 15)
+              p= 'Дата окончания гарантии: ' + data.date_end_garant.toString().slice(0, 15)
+              p= 'Произведено компанией ' + data.name_manufacturer + ', по адресу ' + data.addres_manufacturer
+              p= 'Покупатель: ' + data.surname_customer + ' ' + data.name_customer
+        .fluid.ui.card
+          .content
+            .header Отчет по экспертизе
+            .meta Дата: #{data.date_expertise}
+            .description
+              P Эксперт: #{data.date_expertise}
+              p Результат: #{data.date_expertise}
+        .fluid.ui.card
+          .content
+            .header Результат ремонтных работ
+            .meta
+              p Дата начала: #{data.date_expertise}
+              p Дата окончания: #{data.expertise_result}
+            .description
+              p Ремонтник: #{data.date_expertise}
+              p Результат: #{data.repair_result}
+
 

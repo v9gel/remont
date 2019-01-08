@@ -45,7 +45,6 @@ block content
                       each val, index in select.customer
                         option(value='') Выберете клиента
                         option(value=val.id_customer)= val.surname + ' ' + val.name
-
             .actions
               .ui.deny.black.button Отменить
               .ui.button(onclick="$.post('/products', $('#form').serialize()); location.reload();") Добавить
@@ -73,5 +72,58 @@ block content
                     i.eye.icon
                   button.ui.icon.button(id='modal' + val.id_product)
                     i.edit.icon
-                  button.ui.icon.button
+                    .ui.info.event-modal.modal(data-object='modal' + val.id_product)
+                      .header= 'Редактирование товара'
+                      .content
+                        form.ui.form(id='form'+val.id_product)
+                          .field
+                            label Название
+                            input(type='text', name='name', value=val.name_product placeholder='Название')
+                          .field
+                            label Заводской номер
+                            input(type='text', name='factory_namber', value=val.factory_number placeholder='Заводской номер')
+                          .field
+                            label Начало гарантии
+                            .ui.input.left.icon
+                              i.calendar.icon
+                              input(type='date', name='date_begin_garant' value=val.date_begin_garant , placeholder='Начало гарантии')
+                          .field
+                            label Конец гарантии
+                            .ui.input.left.icon
+                              i.calendar.icon
+                              input(type='date', name='date_end_garant', value=val.date_end_garant placeholder='Конец гарантии')
+                          .field
+                            label Производитель
+                            .ui.input
+                              select.ui.fluid.dropdown(name='id_manufacturer' value=val.id_manufacturer)
+                                option(value='') Выберете производителя
+                                each val1, index in select.manufacturer
+                                  if val.id_manufacturer == val1.id_manufacturer
+                                    option(value=val1.id_manufacturer selected)= val1.name
+                                  else
+                                    option(value=val1.id_manufacturer)= val1.name
+                          .field
+                            label Статус
+                            .ui.input
+                              select.ui.fluid.dropdown(name='id_status' value=val.id_status)
+                                option(value='') Выберете статус
+                                each val1, index in select.status
+                                  if val.id_status == val1.id_status
+                                    option(value=val1.id_status selected)= val1.name
+                                  else
+                                    option(value=val1.id_status)= val1.name
+                          .field
+                            label Клиент
+                            .ui.input
+                              select.ui.fluid.dropdown(name='id_customer' value=val.id_customer)
+                                option(value='') Выберете клиента
+                                each val1, index in select.customer
+                                  if val.id_customer == val1.id_customer
+                                    option(value=val1.id_customer selected)= val1.surname + ' ' + val1.name
+                                  else
+                                    option(value=val1.id_customer )= val1.surname + ' ' + val1.name
+                      .actions
+                        .ui.deny.black.button Отменить
+                        .ui.button(onclick="$.post('/products/" + val.id_product + "', $('#form" + val.id_product + "').serialize()); location.reload();") Сохранить
+                  button.ui.icon.button(onclick="$.ajax({ url: '/products/" + val.id_product + "', type: 'DELETE'});location.reload();")
                     i.trash.icon
